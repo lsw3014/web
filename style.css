@@ -62,6 +62,11 @@ aside#left {
   background: #d40203;
 }
 
+#link {
+  color: red;
+  font-weight: bold;
+}
+
 #main {
   font-size: 12px;
   color: #464646;
