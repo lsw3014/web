@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>스톱워치</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .time {
+            font-size: 40px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="time">00:00:00</div>
+        <div class="buttons">
+            <button onclick="startStopwatch()">시작</button>
+            <button onclick="stopStopwatch()">정지</button>
+            <button onclick="resetStopwatch()">리셋</button>
+        </div>
+    </div>
+
+    <script>
+        let stopwatchInterval;
+        let milliseconds = 0;
+        let seconds = 0;
+        let minutes = 0;
+
+        function startStopwatch() {
+            stopwatchInterval = setInterval(updateStopwatch, 10);
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            milliseconds = 0;
+            seconds = 0;
+            minutes = 0;
+            updateStopwatch();
+        }
+
+        function updateStopwatch() {
+            milliseconds += 10;
+
+            if (milliseconds >= 1000) {
+                milliseconds = 0;
+                seconds++;
+
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+            }
+
+            const timeElement = document.querySelector('.time');
+            timeElement.textContent = formatTime(minutes) + ':' + formatTime(seconds) + ':' + formatTime(Math.floor(milliseconds / 10));
+        }
+
+        function formatTime(time) {
+            return time < 10 ? '0' + time : time;
+        }
+    </script>
+</body>
+</html>
